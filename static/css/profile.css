@@ -1,0 +1,91 @@
+body {
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* --- PROFILE CARD --- */
+
+.profile-card {
+    display: flex;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info div {
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+/* --- STATS --- */
+
+.stats-block {
+    margin-top: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.07);
+}
+
+.stats-title {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stat-item {
+    background: #fafafa;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e2e2e2;
+    font-size: 15px;
+}
+
+.stat-item b {
+    font-size: 17px;
+}
+
+/* --- TEAM CARD --- */
+
+.team-card {
+    margin-top: 25px;
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.07);
+}
+
+.team-logo {
+    display: block;
+    margin: 0 auto 15px auto; /* Центрирование */
+    width: 90px;              /* Можно изменить размер */
+    height: 90px;
+    object-fit: contain;
+}
+

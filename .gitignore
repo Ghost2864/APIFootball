@@ -1,0 +1,7 @@
+/test.py
+/test_redis.py
+.env
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
