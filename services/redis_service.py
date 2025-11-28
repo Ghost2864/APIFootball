@@ -32,13 +32,13 @@ def make_cache_key(fn, args, kwargs):
 async def get_data_with_cache(fetch_fn, *args, **kwargs):
     try:
         key = make_cache_key(fetch_fn, args, kwargs)
-        data = r.get(key)
-        ts = r.get(key + ":ts")
+        data = await r.get(key)
+        ts = await r.get(key + ":ts")
 
         if not data or not ts:
             fresh = await fetch_fn(*args, **kwargs)
-            r.set(key, json.dumps(fresh))
-            r.set(key + ":ts", time.time())
+            await r.set(key, json.dumps(fresh))
+            await r.set(key + ":ts", time.time())
             return fresh
 
         age = time.time() - float(ts)
