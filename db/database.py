@@ -1,16 +1,13 @@
-# db.py
 from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from db.database import settings
 
-# Создаём асинхронный движок
 engine = create_async_engine(
     settings.db_url,
     echo=False,           
     pool_pre_ping=True    
 )
 
-# Фабрика сессий
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,

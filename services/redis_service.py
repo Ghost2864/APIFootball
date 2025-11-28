@@ -1,15 +1,16 @@
 import time
 import json
 import asyncio
-import redis
+from redis.asyncio import Redis
 from config import redis_config
 
-r = redis.Redis(
+r = Redis(
     host=redis_config.REDIS_HOST,
     port=redis_config.REDIS_PORT,
     password=redis_config.REDIS_PASSWORD,
     decode_responses=True
 )
+
 
 
 async def refresh_cache(key, fetch_fn, *args, **kwargs):
@@ -29,19 +30,27 @@ def make_cache_key(fn, args, kwargs):
 
 
 async def get_data_with_cache(fetch_fn, *args, **kwargs):
-    key = make_cache_key(fetch_fn, args, kwargs)
-    data = r.get(key)
-    ts = r.get(key + ":ts")
+    try:
+        key = make_cache_key(fetch_fn, args, kwargs)
+        data = r.get(key)
+        ts = r.get(key + ":ts")
 
-    if not data or not ts:
-        fresh = await fetch_fn(*args, **kwargs)
-        r.set(key, json.dumps(fresh))
-        r.set(key + ":ts", time.time())
-        return fresh
+        if not data or not ts:
+            fresh = await fetch_fn(*args, **kwargs)
+            r.set(key, json.dumps(fresh))
+            r.set(key + ":ts", time.time())
+            return fresh
 
-    age = time.time() - float(ts)
+        age = time.time() - float(ts)
 
-    if age < redis_config.MAIN_TTL:
+        if age < redis_config.MAIN_TTL:
+            return json.loads(data)
+        asyncio.create_task(refresh_cache(key, fetch_fn, *args, **kwargs))
+        print("Все нормально данные получены или записаны в redis")
         return json.loads(data)
-    asyncio.create_task(refresh_cache(key, fetch_fn, *args, **kwargs))
-    return json.loads(data)
+        
+    except:
+        print("redis не подключен делай запрос через api")
+        data = await fetch_fn(*args, **kwargs)
+        return data
+

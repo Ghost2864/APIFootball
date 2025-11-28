@@ -1,56 +1,98 @@
 body {
-    background: #f5f5f5;
     font-family: Arial, sans-serif;
+    background: #f5f5f5;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
-.page-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px;
+.container {
+    max-width: 900px;
+    margin: auto;
 }
 
-/* --- PROFILE CARD --- */
+/* ------------------------- */
+/*   БЛОК ПРОФИЛЯ ИГРОКА     */
+/* ------------------------- */
 
 .profile-card {
     display: flex;
+    gap: 20px;
     background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    align-items: center;
-    gap: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .profile-photo {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
     object-fit: cover;
 }
 
-.profile-info div {
-    margin-bottom: 4px;
-    font-size: 15px;
+/* Общий контейнер информации */
+.profile-info {
+    flex: 1;
 }
 
-/* --- STATS --- */
+.profile-info div {
+    margin-bottom: 6px;
+}
+
+/* Лого клуба справа от имени */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.player-club {
+    font-size: 15px;
+    color: #444;
+    margin-top: 3px;
+}
+
+/* Логотип клуба */
+.club-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* ------------------------- */
+/*   БЛОКИ СТАТИСТИКИ        */
+/* ------------------------- */
 
 .stats-block {
-    margin-top: 25px;
     background: white;
-    padding: 20px;
+    padding: 15px;
+    margin-top: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Лого турнира над названием */
+.league-logo {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: contain;
 }
 
 .stats-title {
     font-size: 20px;
+    font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
 }
 
+/* 2 карточки статистики в ряд */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -59,33 +101,21 @@ body {
 
 .stat-item {
     background: #fafafa;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid #e2e2e2;
-    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
 }
 
-.stat-item b {
-    font-size: 17px;
+/* Адаптация под мобильные */
+@media (max-width: 650px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .club-logo {
+        width: 45px;
+        height: 45px;
+    }
 }
-
-/* --- TEAM CARD --- */
-
-.team-card {
-    margin-top: 25px;
-    background: white;
-    padding: 22px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.07);
-}
-
-.team-logo {
-    display: block;
-    margin: 0 auto 15px auto; /* Центрирование */
-    width: 90px;              /* Можно изменить размер */
-    height: 90px;
-    object-fit: contain;
-}
-
