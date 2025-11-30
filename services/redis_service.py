@@ -14,13 +14,13 @@ r = Redis(
 
 
 async def refresh_cache(key, fetch_fn, *args, **kwargs):
-    if not r.set(key + ":lock", "1", nx=True, ex=60):
+    if not await r.set(key + ":lock", "1", nx=True, ex=60):
         return
 
     data = await fetch_fn(*args, **kwargs)
 
-    r.set(key, json.dumps(data))
-    r.set(key + ":ts", time.time())
+    await r.set(key, json.dumps(data))
+    await r.set(key + ":ts", time.time())
 
 
 def make_cache_key(fn, args, kwargs):
@@ -46,11 +46,9 @@ async def get_data_with_cache(fetch_fn, *args, **kwargs):
         if age < redis_config.MAIN_TTL:
             return json.loads(data)
         asyncio.create_task(refresh_cache(key, fetch_fn, *args, **kwargs))
-        print("Все нормально данные получены или записаны в redis")
         return json.loads(data)
         
     except:
-        print("redis не подключен делай запрос через api")
         data = await fetch_fn(*args, **kwargs)
         return data
 

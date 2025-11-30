@@ -6,13 +6,14 @@ from handlers.league_router import league_router
 from handlers.player_router import player_router
 from handlers.squad_router import squad_router
 from handlers.team_router import team_router
-
+from handlers.user_router import user_router
 
 app = FastAPI()
 app.include_router(league_router)
 app.include_router(player_router)
 app.include_router(squad_router)
 app.include_router(team_router)
+app.include_router(user_router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
@@ -39,11 +40,6 @@ def serve_squad_page():
 @app.get("/profile")
 def serve_profile_page():
     return FileResponse("static/profile.html")
-
-
-
-
-
 
 
 

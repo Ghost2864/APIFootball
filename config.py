@@ -1,4 +1,5 @@
 from pathlib import Path
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ENV_PATH = Path(__file__).resolve().parent / ".env"
@@ -41,7 +42,8 @@ class Settings(BaseSettings):
         env_file=ENV_PATH,
         extra="ignore"
     )
-    @staticmethod 
+
+    @staticmethod
     def extract_position_stats(player, stats):
         pos = stats["games"]["position"]
         groups = POSITION_FIELDS.get(pos, {})
@@ -49,8 +51,10 @@ class Settings(BaseSettings):
         for group, fields in groups.items():
             for field in fields: result[f"{group}.{field}"] = stats.get(group, {}).get(field)
         return result
+    
     @property
     def headers(self) -> dict: return {"x-apisports-key": self.SECRET_API_KEY}
+
 
 class RedisConfig(BaseSettings):
     REDIS_HOST: str = "localhost"
@@ -58,9 +62,7 @@ class RedisConfig(BaseSettings):
     REDIS_PASSWORD: str | None = None
     MAIN_TTL:int = 3600
     STATE_TTL:int = 86400
-        
-
-
+    
     model_config = SettingsConfigDict(
         env_file=ENV_PATH,
         extra="ignore"

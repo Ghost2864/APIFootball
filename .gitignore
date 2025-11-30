@@ -1,7 +1,8 @@
 /test.py
 /test_redis.py
-.env
 __pycache__/
+.env
 *.py[cod]
 *.pyo
 *.pyd
+alembic.ini
