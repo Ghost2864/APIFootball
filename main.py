@@ -19,9 +19,11 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def serve_main_page():
+    return FileResponse("static/login.html")
+
+@app.get("/country")
+def serve_country_page():
     return FileResponse("static/index.html")
-
-
 
 @app.get("/league")
 def serve_league_page():

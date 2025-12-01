@@ -1,0 +1,75 @@
+/* Общий стиль */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Карточка логина */
+.login-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+/* Заголовок */
+.login-card h2 {
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Поля ввода */
+.login-card input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.2s;
+    align-self: center;
+}
+
+.login-card input:focus {
+    border-color: #2a5298;
+    outline: none;
+    box-shadow: 0 0 5px rgba(42,82,152,0.5);
+}
+
+/* Кнопка */
+.login-card button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a5298;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.login-card button:hover {
+    background-color: #1e3c72;
+}
+
+/* Сообщение об ошибке */
+.error {
+    color: red;
+    font-size: 14px;
+    min-height: 18px;
+}
